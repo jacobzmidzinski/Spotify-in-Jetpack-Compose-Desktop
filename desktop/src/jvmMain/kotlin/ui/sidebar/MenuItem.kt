@@ -11,16 +11,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.imageFromResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import theme.Colors
 
 @Composable
-fun MenuItem(text: String, image: String, isSelected: Boolean = false) {
+fun MenuItem(text: String, image: String, width: Dp, isSelected: Boolean = false) {
     var selectedState: Boolean by remember { mutableStateOf(isSelected) }
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
-            .preferredSize(160.dp, 26.dp)
+            .preferredSize(width, 26.dp)
             .background(Colors.Surface)
             .clickable {
                 selectedState = !selectedState

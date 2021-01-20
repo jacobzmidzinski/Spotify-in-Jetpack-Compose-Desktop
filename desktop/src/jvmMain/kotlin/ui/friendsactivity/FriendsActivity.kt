@@ -15,9 +15,10 @@ fun FriendsActivity() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
         modifier = Modifier
-            .preferredWidth(240.dp)
             .fillMaxHeight()
             .padding(32.dp)
+            .preferredWidth(180.dp)
+            .widthIn(180.dp, 400.dp)
     ) {
         Text(
             text = "See what your friends are playing",
