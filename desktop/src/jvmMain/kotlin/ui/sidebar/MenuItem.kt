@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import theme.Colors
 
 @Composable
-fun MenuItem(text: String, image: String, width: Dp, isSelected: Boolean = false) {
+fun MenuItem(text: String, width: Dp, image: String? = null, isSelected: Boolean = false) {
     var selectedState: Boolean by remember { mutableStateOf(isSelected) }
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -28,11 +28,13 @@ fun MenuItem(text: String, image: String, width: Dp, isSelected: Boolean = false
             }
     ) {
         SelectionIndicator(isSelected = selectedState)
-        Image(
-            imageFromResource(image),
-            Modifier
-                .preferredSize(36.dp)
-        )
+        if (!image.isNullOrEmpty()) {
+            Image(
+                imageFromResource(image),
+                Modifier
+                    .preferredSize(36.dp)
+            )
+        }
         Spacer(
             Modifier
                 .width(12.dp)

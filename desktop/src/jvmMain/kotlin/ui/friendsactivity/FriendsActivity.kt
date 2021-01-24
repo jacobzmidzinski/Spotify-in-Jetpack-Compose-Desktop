@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 fun FriendsActivity() {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.spacedBy(32.dp, alignment = Alignment.CenterVertically),
         modifier = Modifier
             .fillMaxHeight()
             .padding(32.dp)
@@ -24,10 +24,6 @@ fun FriendsActivity() {
             text = "See what your friends are playing",
             color = Color.White,
             textAlign = TextAlign.Center
-        )
-        Spacer(
-            modifier = Modifier
-                .height(32.dp)
         )
         FindFriendsButton()
     }
