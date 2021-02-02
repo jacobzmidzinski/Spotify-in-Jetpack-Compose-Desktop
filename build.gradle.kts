@@ -1,27 +1,32 @@
-buildscript {
-    // __LATEST_COMPOSE_RELEASE_VERSION__
-    val composeVersion = System.getenv("COMPOSE_TEMPLATE_COMPOSE_VERSION") ?: "0.3.0-build135"
+import org.jetbrains.compose.compose
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-    repositories {
-        // TODO: remove after new build is published
-        mavenLocal()
-        google()
-        jcenter()
-        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
-    }
-
-    dependencies {
-        classpath("org.jetbrains.compose:compose-gradle-plugin:$composeVersion")
-        classpath("com.android.tools.build:gradle:4.0.1")
-        // __KOTLIN_COMPOSE_VERSION__
-        classpath(kotlin("gradle-plugin", version = "1.4.21"))
-    }
+plugins {
+    kotlin("jvm") version "1.4.21"
+    id("org.jetbrains.compose") version "0.3.0-build135"
 }
 
-allprojects {
-    repositories {
-        google()
-        jcenter()
-        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+repositories {
+    jcenter()
+    mavenCentral()
+    maven { url = uri("https://maven.pkg.jetbrains.space/public/p/compose/dev") }
+}
+
+dependencies {
+    implementation(compose.desktop.currentOs)
+}
+
+tasks.withType<KotlinCompile>() {
+    kotlinOptions.jvmTarget = "11"
+}
+
+compose.desktop {
+    application {
+        mainClass = "MainKt"
+        nativeDistributions {
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            packageName = "Spotify"
+        }
     }
 }
